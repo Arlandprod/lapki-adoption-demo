@@ -1,0 +1,204 @@
+@import "tailwindcss";
+@theme {
+  --color-brand: #245443;
+  --color-ink: #222d27;
+  --color-muted: #5b6860;
+  --color-canvas: #fafbf9;
+  --color-line: #d8e0d9;
+  --color-soft: #eef3ee;
+  --color-brand-soft: #e4eee7;
+  --font-sans: "Segoe UI", Arial, sans-serif;
+}
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply m-0 bg-canvas font-sans text-base text-ink antialiased; }
+  button, input, select, textarea { font: inherit; }
+  button { @apply cursor-pointer; }
+  button:disabled { @apply cursor-default text-muted; }
+  button:active:not(:disabled) { transform: scale(.98); }
+  :focus-visible { outline: 3px solid #397352; outline-offset: 4px; }
+  h1, h2, h3, h4, p { @apply m-0; }
+  p { line-height: 1.65; }
+  a { @apply underline decoration-line underline-offset-4; }
+  a:hover { @apply decoration-brand; }
+  img { @apply block max-w-full; }
+  input[type="checkbox"] { @apply h-5 w-5 shrink-0 accent-brand; }
+  hr { @apply my-5 border-0 border-t border-line; }
+}
+@layer components {
+  .page-width { @apply mx-auto w-full max-w-[1280px] px-6 lg:px-10; }
+  .demo-banner { @apply bg-brand py-2.5 px-5 text-center text-sm font-medium text-white; }
+  .site-header { @apply flex flex-wrap items-center justify-between gap-5 py-6; }
+  .brand { @apply flex items-center gap-2.5 text-3xl font-semibold tracking-tight text-brand; }
+  .site-header nav { @apply flex flex-wrap items-center gap-1; }
+  .site-header nav button { @apply flex min-h-11 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-muted; }
+  .site-header nav button:hover, .site-header nav button[aria-current] { @apply bg-brand-soft text-brand; }
+  .count { @apply inline-flex min-w-6 items-center justify-center rounded-full bg-white px-1.5 py-0.5 text-sm tabular-nums text-brand; }
+  .intro { @apply grid gap-8 border-b border-line pt-6 pb-9 md:grid-cols-[1fr_300px] md:items-center; }
+  .eyebrow { @apply text-sm font-semibold tracking-wide text-brand; }
+  .intro h1 { @apply mt-3 text-[2.75rem] font-semibold tracking-[-.035em] leading-[1.1] lg:text-[3.25rem]; }
+  .intro h1 span { @apply text-brand; }
+  .intro h1:focus, .modal-header h2:focus, .step-heading h3:focus, .application-success h3:focus { outline: none; }
+  .intro > div > p:last-child { @apply mt-4 max-w-[520px] text-muted; }
+  .intro-note { @apply flex items-start gap-3 rounded-2xl border border-line p-5; }
+  .intro-note svg { @apply mt-1 shrink-0 text-brand; }
+  .intro-note strong { @apply block text-base font-semibold; }
+  .intro-note p { @apply mt-2 text-sm text-muted; }
+  .catalog-layout { @apply grid items-start gap-10 py-8 lg:grid-cols-[230px_1fr] lg:gap-12; }
+  .filters-desktop { @apply hidden lg:block; }
+  .filters-mobile { @apply block rounded-xl border border-line bg-white lg:hidden; }
+  .filters-mobile summary { @apply flex min-h-12 cursor-pointer items-center gap-3 px-4 py-3 font-semibold; }
+  .mobile-filter-content { @apply border-t border-line p-5; }
+  .filter-heading { @apply mb-6 flex items-center gap-2.5; }
+  .filter-heading h2 { @apply text-lg font-semibold; }
+  .filter-group { @apply mb-5 border-0 p-0; }
+  .filter-group legend { @apply mb-2 text-sm font-semibold; }
+  .species-control { @apply grid grid-cols-3 gap-1 rounded-xl border border-line bg-white p-1; }
+  .species-control button { @apply flex min-h-10 items-center justify-center gap-1 rounded-lg px-1 py-2 text-sm font-medium text-muted; }
+  .species-control button.selected { @apply bg-brand text-white; }
+  .species-control button:hover:not(.selected) { @apply bg-soft; }
+  .field { @apply mb-5 flex flex-col gap-2 text-sm font-semibold; }
+  .field input, .field select, .field textarea { @apply w-full rounded-lg border border-line bg-white px-3.5 py-3 text-base font-normal text-ink; }
+  .field select { @apply min-h-12 pr-7; }
+  .field textarea { @apply resize-y; }
+  .field [aria-invalid="true"] { border-color: #aa352f; }
+  .field-error { @apply block text-sm font-normal; color: #a92f2b; }
+  .field-hint { @apply text-sm font-normal leading-relaxed text-muted; }
+  .check { @apply my-4 flex min-h-8 cursor-pointer items-start gap-3 text-sm leading-relaxed; }
+  .check input { @apply mt-0.5; }
+  .filter-note { @apply mt-5 text-sm text-muted; }
+  .text-button { @apply inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand underline decoration-line underline-offset-4; }
+  .text-button:hover:not(:disabled) { @apply decoration-brand; }
+  .text-button:disabled { @apply no-underline; }
+  .results-heading { @apply mb-6 flex flex-wrap items-baseline justify-between gap-3; }
+  .results-heading h2 { @apply text-xl font-semibold tracking-tight; }
+  .results-heading p { @apply text-sm tabular-nums text-muted; }
+  .results-heading strong { @apply text-ink; }
+  .pet-grid { @apply grid grid-cols-1 gap-x-7 gap-y-10 sm:grid-cols-2; }
+  .pet-card { @apply min-w-0; }
+  .card-image { @apply relative; }
+  .pet-photo { @apply aspect-[6/5] overflow-hidden rounded-2xl bg-soft; }
+  .pet-photo img { @apply h-full w-full object-cover; }
+  .photo-error { @apply flex h-full flex-col items-center justify-center gap-3 text-muted; }
+  .demo-image-label { @apply absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-xs font-semibold text-ink; }
+  .favorite-button { @apply absolute top-3 right-3 grid h-11 w-11 place-items-center rounded-full border border-white bg-white text-ink; transition: transform 160ms ease, background-color 160ms ease; }
+  .favorite-button:hover { @apply bg-brand-soft text-brand; }
+  .favorite-button.is-favorite { @apply bg-brand text-white; }
+  .card-content { @apply pt-4; }
+  .card-meta { @apply text-sm text-muted; }
+  .card-content h3 { @apply mt-1.5 text-[1.65rem] font-semibold tracking-tight; }
+  .card-story { @apply mt-1.5 min-h-[3.3rem] text-base text-muted; }
+  .tags { @apply mt-4 flex flex-wrap gap-2; }
+  .tags span { @apply rounded-md bg-soft px-2.5 py-1.5 text-sm text-brand; }
+  .card-open { @apply mt-4 flex min-h-12 w-full items-center justify-center rounded-xl border border-line bg-white px-4 py-3 text-base font-semibold text-brand; }
+  .card-open:hover { @apply border-brand bg-brand-soft; }
+  .catalog-caption { @apply mt-9 border-t border-line pt-5 text-sm text-muted; }
+  .empty-state { @apply flex min-h-[300px] flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-line p-8 text-center; }
+  .empty-state > svg { @apply text-brand; }
+  .empty-state h2, .empty-state h3 { @apply text-2xl font-semibold; }
+  .empty-state p { @apply max-w-[420px] text-muted; }
+  .button-primary { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-brand bg-brand px-5 py-3 text-base font-semibold text-white; }
+  .button-primary:hover { background: #1b4234; }
+  .button-secondary { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-line bg-white px-5 py-3 text-base font-semibold text-brand; }
+  .button-secondary:hover { @apply border-brand bg-brand-soft; }
+  .storage-warning { @apply mt-5 rounded-xl border border-line bg-soft p-4 text-sm; }
+  .site-footer { @apply mt-6 border-t border-line pt-6 pb-8; }
+  .footer-line { @apply flex flex-wrap items-center justify-between gap-4; }
+  .footer-line p { @apply text-sm text-muted; }
+  .footer-brand { @apply flex items-center gap-2 text-lg font-semibold text-brand; }
+  .credits { @apply mt-5 text-sm text-muted; }
+  .credits summary { @apply w-fit cursor-pointer py-2 text-brand; }
+  .credits > p { @apply mt-3 max-w-[780px]; }
+  .credits ul { @apply mt-3 grid list-none gap-x-5 gap-y-2 p-0 sm:grid-cols-2; }
+  .skip-link { @apply fixed top-3 left-3 z-50 rounded-lg bg-brand px-5 py-3 text-white no-underline; transform: translateY(-180%); }
+  .skip-link:focus { transform: translateY(0); }
+  .modal { @apply fixed m-auto max-h-[92dvh] w-[calc(100%-2rem)] max-w-[1000px] overflow-y-auto rounded-2xl border-0 bg-white p-0 text-ink; box-shadow: 0 24px 100px #13261c30; }
+  .modal::backdrop { background: #13251dcc; }
+  .modal-surface { @apply w-full; }
+  .modal-header { @apply flex items-center justify-between gap-3 border-b border-line px-7 py-5; }
+  .modal-header h2 { @apply min-w-0 text-2xl font-semibold tracking-tight; }
+  .icon-button { @apply grid h-11 w-11 shrink-0 place-items-center rounded-full bg-soft text-ink; }
+  .icon-button:hover { @apply bg-brand-soft; }
+  .profile { @apply grid gap-8 p-7 md:grid-cols-[.85fr_1.15fr]; }
+  .profile-photo-column { @apply min-w-0; }
+  .profile .pet-photo { @apply aspect-[4/5]; }
+  .photo-credit { @apply mt-3 text-sm text-muted; }
+  .profile-content { @apply min-w-0; }
+  .profile-subtitle { @apply mt-2 text-sm text-muted; }
+  .profile-lead { @apply mt-4 text-xl font-semibold leading-relaxed; }
+  .profile-content > p:not(.profile-lead):not(.eyebrow):not(.profile-subtitle) { @apply mt-4 text-muted; }
+  .profile-content h3 { @apply mt-6 mb-2 text-lg font-semibold; }
+  .profile-facts { @apply mt-5 flex flex-col gap-3 border-y border-line py-5; }
+  .profile-facts span { @apply flex items-start gap-2.5 text-sm; }
+  .profile-facts svg { @apply shrink-0 text-brand; }
+  .facts-list > div { @apply flex flex-wrap justify-between gap-x-4 gap-y-1 py-1.5 text-sm; }
+  .facts-list dt { @apply text-muted; }
+  .facts-list dd { @apply m-0 text-right; }
+  .notice { @apply mt-5 rounded-xl border border-line bg-soft p-4 text-sm; }
+  .notice h3, .notice h4 { @apply mt-0 mb-2 text-base font-semibold; }
+  .notice ul { @apply my-2 list-disc space-y-2 pl-5; }
+  .demo-note { @apply text-sm text-muted; }
+  .profile-actions { @apply mt-6 flex flex-wrap gap-3; }
+  .application { @apply mx-auto max-w-[780px] px-7 py-6; }
+  .steps { @apply my-6 grid list-none grid-cols-3 gap-3 p-0; }
+  .steps li { @apply flex items-center gap-2 border-b-2 border-line pb-3 text-sm text-muted; }
+  .steps li > span { @apply grid h-7 w-7 shrink-0 place-items-center rounded-full bg-soft font-semibold; }
+  .steps li.current { @apply border-brand font-semibold text-brand; }
+  .steps li.current > span, .steps li.complete > span { @apply bg-brand text-white; }
+  .step-heading { @apply my-6 flex flex-wrap items-center justify-between gap-3; }
+  .step-heading h3 { @apply text-xl font-semibold; }
+  .form-grid { @apply grid grid-cols-1 gap-x-5 sm:grid-cols-2; }
+  .full-width { @apply col-span-full; }
+  .form-errors { @apply mb-5 flex items-start gap-2 rounded-lg border p-3 text-sm; color: #a92f2b; border-color: #d0928e; background: #fff8f7; }
+  .form-errors svg { @apply shrink-0; }
+  .form-actions { @apply mt-6 flex justify-end gap-3 border-t border-line pt-6; }
+  .review-list { @apply grid gap-x-6 gap-y-4 sm:grid-cols-2; }
+  .review-list dt { @apply mb-1 text-sm text-muted; }
+  .review-list dd { @apply m-0 break-words text-base; overflow-wrap: anywhere; }
+  .care-reminder { @apply my-5 text-sm text-muted; }
+  .application-success { @apply mx-auto flex max-w-[620px] flex-col items-center gap-4 px-7 py-10 text-center; }
+  .application-success > svg { @apply text-brand; }
+  .application-success h3 { @apply text-3xl font-semibold tracking-tight; }
+  .application-success .button-primary { @apply mt-3; }
+  .receipt { @apply my-2 flex w-full flex-col gap-2 rounded-xl border border-line bg-soft p-5; }
+  .receipt code { @apply break-all text-sm text-brand; }
+  .muted { @apply text-sm text-muted; }
+  .history { @apply py-8; }
+  .history-heading { @apply mb-5 flex flex-wrap items-center justify-between gap-3; }
+  .history-heading h2 { @apply text-xl font-semibold; }
+  .history-item { @apply grid grid-cols-[88px_1fr] items-center gap-5 border-b border-line py-5 sm:grid-cols-[88px_1fr_auto]; }
+  .history-item > img { @apply h-[88px] w-[88px] rounded-xl object-cover; }
+  .history-item > div { @apply min-w-0; }
+  .history-item h3 { @apply mt-1 text-xl font-semibold; }
+  .history-item code { @apply mt-2 block break-all text-sm text-muted; }
+  .history-item time { @apply mt-1 block text-sm text-muted; }
+  .history-item .button-secondary { @apply col-span-full sm:col-span-1; }
+  .history > .demo-note { @apply mt-5; }
+}
+@media (max-width: 639px) {
+  .page-width { padding-inline: 1.125rem; }
+  .site-header { gap: 1rem; padding-block: 1.25rem; }
+  .site-header nav { width: 100%; justify-content: space-between; gap: .125rem; }
+  .site-header nav button { padding-inline: .5rem; font-size: .875rem; gap: .35rem; }
+  .site-header nav svg { display: none; }
+  .intro { padding-top: .75rem; padding-bottom: 1.75rem; gap: 1.5rem; }
+  .intro h1 { font-size: 2.4rem; }
+  .intro-note { padding: 1rem; }
+  .catalog-layout { gap: 1.5rem; padding-top: 1.5rem; }
+  .pet-grid { gap: 2rem; }
+  .card-story { min-height: 0; }
+  .modal { width: calc(100% - 1rem); max-height: 96dvh; }
+  .modal-header { padding: 1rem; }
+  .modal-header h2 { font-size: 1.25rem; }
+  .profile, .application { padding: 1rem; gap: 1.25rem; }
+  .profile .pet-photo { aspect-ratio: 6 / 5; }
+  .steps { gap: .5rem; }
+  .steps li { gap: .35rem; font-size: .8125rem; }
+  .form-actions { flex-wrap: wrap; }
+  .form-actions button { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  button:active:not(:disabled) { transform: none; }
+}
